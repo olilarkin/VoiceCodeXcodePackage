@@ -22,35 +22,43 @@ global._xcode_connector = pack.connector
 
 pack.implement
   'editor:move-to-line-number': (input) ->
-    pack.previous =
-      id: 'editor:move-to-line-number'
-      line: input
-    @key 'v', 'control  option'
+    if input?
+      pack.previous =
+        id: 'editor:move-to-line-number'
+        line: input
+      @key 'v', 'control  option'
   'editor:select-line-number': (input) ->
-    pack.previous =
-      id: 'editor:select-line-number'
-      line: input
+    if input?
+      pack.previous =
+        id: 'editor:select-line-number'
+        line: input
+      @key 'v', 'control  option'
+  'editor:move-to-line-number-and-way-right':  (input) ->
+    if input?
+      pack.previous =
+        id: 'editor:move-to-line-number-and-way-right'
+        line: input
+      @key 'v', 'control  option'
+  'editor:move-to-line-number-and-way-left':  (input) ->
+    if input?
+      pack.previous =
+        id: 'editor:move-to-line-number-and-way-left'
+        line: input
     @key 'v', 'control  option'
-  # 'editor:move-to-line-number-and-way-right':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
-  # 'editor:move-to-line-number-and-way-left':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
-  # 'editor:insert-under-line-number':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
-  # 'editor:expand-selection-to-scope':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
-  # 'editor:click-expand-selection-to-scope':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
+  'editor:insert-under-line-number':  (input) ->
+    if input?
+      pack.previous =
+        id: 'editor:insert-under-line-number'
+        line: input
+      @key 'v', 'control  option'
+  'editor:expand-selection-to-scope':  ->
+    pack.previous =
+      id: 'editor:expand-selection-to-scope'
+    @key 'v', 'control  option'
+  'editor:click-expand-selection-to-scope':  ->
+    pack.previous =
+      id: 'editor:click-expand-selection-to-scope'
+    @key 'v', 'control  option'
   'editor:select-line-number-range': (input) ->
     if input?
       number = input.toString()
@@ -63,30 +71,34 @@ pack.implement
         temp = last
         last = first
         first = temp
-    pack.previous =
-      id: 'editor:select-line-number-range'
-      first: first
-      last: last
+      pack.previous =
+        id: 'editor:select-line-number-range'
+        first: first
+        last: last
     @key 'v', 'control  option'
-  # 'editor:extend-selection-to-line-number':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
-  # 'editor:insert-from-line-number':  ->
-  #   pack.previous =
-  #     id: 'editor:select-line-number'
-  #   @key 'v', 'control  option'
+  'editor:extend-selection-to-line-number': (input) ->
+    if input?
+      pack.previous =
+        id: 'editor:extend-selection-to-line-number'
+        line: input
+      @key 'v', 'control  option'
+  'editor:insert-from-line-number': (input) ->
+    if input?
+      pack.previous =
+        id: 'editor:insert-from-line-number'
+        line: input
+      @key 'v', 'control  option'
   # 'editor:toggle-comments':  ->
   #   pack.previous =
-  #     id: 'editor:select-line-number'
+  #     id: 'editor:toggle-comments'
   #   @key 'v', 'control  option'
   # 'editor:insert-code-template':  ->
   #   pack.previous =
-  #     id: 'editor:select-line-number'
+  #     id: 'editor:insert-code-template'
   #   @key 'v', 'control  option'
   # 'editor:complete-code-template'
   #   pack.previous =
-  #     id: 'editor:select-line-number'
+  #     id: 'editor:complete-code-template'
   #   @key 'v', 'control  option'
 
   # 'text-manipulation:move-line-up': ->
