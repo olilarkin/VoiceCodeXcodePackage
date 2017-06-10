@@ -73,8 +73,8 @@ pack.implement
         first = temp
       pack.previous =
         id: 'editor:select-line-number-range'
-        first: first
-        last: last
+        line: first
+        lastline: last
     @key 'v', 'control  option'
   'editor:extend-selection-to-line-number': (input) ->
     if input?
