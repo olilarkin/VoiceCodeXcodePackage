@@ -1,0 +1,17 @@
+{
+  "name": "voicecode-xcode",
+  "version": "1.0.0",
+  "description": "VoiceCode.io Xcode integration",
+  "main": "package.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ws": "^0.8.0"
+  },
+  "keywords": [
+    "voicecode"
+  ],
+  "author": "",
+  "license": "ISC"
+}
