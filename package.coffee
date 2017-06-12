@@ -20,7 +20,22 @@ pack.getCommand = ->
 pack.connector = new XcodeConnector(pack.getCommand)
 global._xcode_connector = pack.connector
 
+pack.commands
+  'jump-to-selection': ->
+    enabled: true
+    action: ->
+      @key 'l', 'command shift'
+
 pack.implement
+  'os:get-selected-text': ->
+    pack.previous =
+      id: 'os:get-selected-text'
+    fiber = Fiber.current
+    global._xcode_callbacks.push(-> fiber.run())
+    @key 'v', 'control  option'
+    Fiber.yield()
+    return pack.connector.selectedText
+
   'editor:move-to-line-number': (input) ->
     if input?
       pack.previous =
@@ -100,18 +115,18 @@ pack.implement
   #   pack.previous =
   #     id: 'editor:complete-code-template'
   #   @key 'v', 'control  option'
-
+  #
   # 'text-manipulation:move-line-up': ->
   #   @key '[', 'command option'
 
-  # 'selection:previous-occurrence'
-  # 'selection:next-occurrence'
-  # 'selection:extend-to-next-occurrence'
-  # 'selection:extend-to-previous-occurrence'
-  # 'selection:previous-selection-occurrence'
-  # 'selection:next-selection-occurrence'
-  # 'selection:range-upward'
-  # 'selection:range-downward'
-  # 'selection:range-on-current-line'
-  # 'selection:previous-word-by-surrounding-characters'
-  # 'selection:next-word-by-surrounding-characters'
+# 'selection:previous-occurrence'
+# 'selection:next-occurrence'
+# 'selection:extend-to-next-occurrence'
+# 'selection:extend-to-previous-occurrence'
+# 'selection:previous-selection-occurrence'
+# 'selection:next-selection-occurrence'
+# 'selection:range-upward'
+# 'selection:range-downward'
+# 'selection:range-on-current-line'
+# 'selection:previous-word-by-surrounding-characters'
+# 'selection:next-word-by-surrounding-characters'
