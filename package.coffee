@@ -103,30 +103,50 @@ pack.implement
         id: 'editor:insert-from-line-number'
         line: input
       @key 'v', 'control  option'
-  # 'editor:toggle-comments':  ->
-  #   pack.previous =
-  #     id: 'editor:toggle-comments'
-  #   @key 'v', 'control  option'
-  # 'editor:insert-code-template':  ->
-  #   pack.previous =
-  #     id: 'editor:insert-code-template'
-  #   @key 'v', 'control  option'
+  'editor:toggle-comments':  ->
+    @key '/', 'command'
+  'editor:insert-code-template':  ->
+    @key '2', 'command control option'
   # 'editor:complete-code-template'
   #   pack.previous =
   #     id: 'editor:complete-code-template'
   #   @key 'v', 'control  option'
   #
-  # 'text-manipulation:move-line-up': ->
-  #   @key '[', 'command option'
+  'text-manipulation:move-line-up': ->
+    @key '[', 'command option'
+  'text-manipulation:move-line-down': ->
+    @key '', 'command option'
 
-# 'selection:previous-occurrence'
-# 'selection:next-occurrence'
+# 'selection:previous-occurrence': (input) ->
+  # if input?
+  #   pack.previous =
+  #     id: 'editor:insert-from-line-number'
+  #     line: input
+  #   @key 'v', 'control  option'
+# 'selection:next-occurrence': (input) ->
+  # if input?
+  #   pack.previous =
+  #     id: 'editor:insert-from-line-number'
+  #     line: input
+  #   @key 'v', 'control  option'
 # 'selection:extend-to-next-occurrence'
 # 'selection:extend-to-previous-occurrence'
-# 'selection:previous-selection-occurrence'
-# 'selection:next-selection-occurrence'
-# 'selection:range-upward'
-# 'selection:range-downward'
-# 'selection:range-on-current-line'
+
+  'selection:previous-selection-occurrence': ->
+    @key 'e', 'command'
+    @key 'g', 'command shift'
+  'selection:next-selection-occurrence': ->
+    @key 'e', 'command'
+    @key 'g', 'command'
+  'selection:range-upward': ->
+    @key 'up', 'shift'
+  'selection:range-downward': ->
+    @key 'down', 'shift'
+ # 'selection:range-on-current-line': (input) ->
+ #  if input?
+ #    pack.previous =
+ #      id: 'selection:range-on-current-line'
+ #      line: input
+ #    @key 'v', 'control  option'
 # 'selection:previous-word-by-surrounding-characters'
 # 'selection:next-word-by-surrounding-characters'
