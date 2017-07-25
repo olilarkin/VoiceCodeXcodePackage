@@ -9,7 +9,7 @@ pack = Packages.register
   applications: ['com.apple.dt.Xcode']
   description: 'Xcode IDE integration'
 
-Settings.os = {terminalApplications: pack.applications()}
+# Settings.os = {terminalApplications: pack.applications()}
 Settings.os = {editorApplications: pack.applications()}
 
 pack.previous = {id: 'initial-state'}
@@ -27,53 +27,64 @@ pack.commands
       @key 'l', 'command shift'
 
 pack.implement
-  'os:get-selected-text': ->
+  # 'os:get-selected-text': ->
+  #   pack.previous =
+  #     id: 'os:get-selected-text'
+  #   fiber = Fiber.current
+  #   global._xcode_callbacks.push(-> fiber.run())
+  #   @key 'v', 'control option'
+  #   Fiber.yield()
+  #   return pack.connector.selectedText
+
+  'object:next': ->
+    @key 'right', 'command control'
+  'object:previous': ->
+    @key 'left', 'command control'
+  'object:duplicate': ->
     pack.previous =
-      id: 'os:get-selected-text'
-    fiber = Fiber.current
-    global._xcode_callbacks.push(-> fiber.run())
-    @key 'v', 'control  option'
-    Fiber.yield()
-    return pack.connector.selectedText
+      id: 'object:duplicate'
+    @key 'v', 'control option'
+
+  # 'delete:lines': ({first, last} = {}) ->
 
   'editor:move-to-line-number': (input) ->
     if input?
       pack.previous =
         id: 'editor:move-to-line-number'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:select-line-number': (input) ->
     if input?
       pack.previous =
         id: 'editor:select-line-number'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:move-to-line-number-and-way-right':  (input) ->
     if input?
       pack.previous =
         id: 'editor:move-to-line-number-and-way-right'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:move-to-line-number-and-way-left':  (input) ->
     if input?
       pack.previous =
         id: 'editor:move-to-line-number-and-way-left'
         line: input
-    @key 'v', 'control  option'
+    @key 'v', 'control option'
   'editor:insert-under-line-number':  (input) ->
     if input?
       pack.previous =
         id: 'editor:insert-under-line-number'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:expand-selection-to-scope':  ->
     pack.previous =
       id: 'editor:expand-selection-to-scope'
-    @key 'v', 'control  option'
+    @key 'v', 'control option'
   'editor:click-expand-selection-to-scope':  ->
     pack.previous =
       id: 'editor:click-expand-selection-to-scope'
-    @key 'v', 'control  option'
+    @key 'v', 'control option'
   'editor:select-line-number-range': (input) ->
     if input?
       number = input.toString()
@@ -90,19 +101,19 @@ pack.implement
         id: 'editor:select-line-number-range'
         line: first
         lastline: last
-    @key 'v', 'control  option'
+    @key 'v', 'control option'
   'editor:extend-selection-to-line-number': (input) ->
     if input?
       pack.previous =
         id: 'editor:extend-selection-to-line-number'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:insert-from-line-number': (input) ->
     if input?
       pack.previous =
         id: 'editor:insert-from-line-number'
         line: input
-      @key 'v', 'control  option'
+      @key 'v', 'control option'
   'editor:toggle-comments':  ->
     @key '/', 'command'
   'editor:insert-code-template':  ->
@@ -110,7 +121,7 @@ pack.implement
   # 'editor:complete-code-template'
   #   pack.previous =
   #     id: 'editor:complete-code-template'
-  #   @key 'v', 'control  option'
+  #   @key 'v', 'control option'
   #
   'text-manipulation:move-line-up': ->
     @key '[', 'command option'
@@ -122,13 +133,13 @@ pack.implement
   #   pack.previous =
   #     id: 'editor:insert-from-line-number'
   #     line: input
-  #   @key 'v', 'control  option'
+  #   @key 'v', 'control option'
 # 'selection:next-occurrence': (input) ->
   # if input?
   #   pack.previous =
   #     id: 'editor:insert-from-line-number'
   #     line: input
-  #   @key 'v', 'control  option'
+  #   @key 'v', 'control option'
 # 'selection:extend-to-next-occurrence'
 # 'selection:extend-to-previous-occurrence'
 
@@ -147,6 +158,6 @@ pack.implement
  #    pack.previous =
  #      id: 'selection:range-on-current-line'
  #      line: input
- #    @key 'v', 'control  option'
+ #    @key 'v', 'control option'
 # 'selection:previous-word-by-surrounding-characters'
 # 'selection:next-word-by-surrounding-characters'
